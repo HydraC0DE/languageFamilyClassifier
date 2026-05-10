@@ -61,6 +61,16 @@ def create_log_mel_spectrogram(audio):
     # Normalize (helps training)
     log_mel = (log_mel - np.mean(log_mel)) / (np.std(log_mel) + 1e-8)
 
+    # Force fixed time dimension, some inputes were 125 frames, some 126, some 124.
+    TARGET_FRAMES = 125
+    current_frames = log_mel.shape[1]
+
+    if current_frames > TARGET_FRAMES:
+        log_mel = log_mel[:, :TARGET_FRAMES]
+    elif current_frames < TARGET_FRAMES:
+        pad_width = TARGET_FRAMES - current_frames
+        log_mel = np.pad(log_mel, ((0, 0), (0, pad_width)), mode='constant')
+
     return log_mel.astype(np.float32)
 
 
