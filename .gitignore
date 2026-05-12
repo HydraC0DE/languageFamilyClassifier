@@ -11,3 +11,4 @@
 /processed_data/
 /.vscode/
 /__pycache__/
+/saved_weights/

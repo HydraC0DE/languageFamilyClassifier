@@ -7,7 +7,7 @@ from model import build_crnn
 # CONFIG
 # ============================
 
-EPOCHS = 30
+EPOCHS = 10
 BATCH_SIZE = 32
 
 WEIGHTS_DIR = "saved_weights"
@@ -82,6 +82,12 @@ if __name__ == "__main__":
 
         model = build_crnn()
         model.load_weights(WEIGHTS_PATH)
+
+        model.compile(
+            optimizer="adam",
+            loss="categorical_crossentropy",
+            metrics=["accuracy"]
+        )
 
         print("Loading datasets for evaluation...")
         _, _, test_ds = make_splits(batch_size=BATCH_SIZE)
