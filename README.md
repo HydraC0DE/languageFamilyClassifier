@@ -1,42 +1,34 @@
-
-<details>
-<summary><strong>Click to expand folder tree</strong></summary>
 LANGUAGEFAMILYCLASSIFIER/
-│
-├── ar/
-│   ├── clips/
-│   ├── clip_durations.tsv
-│   ├── dev.tsv
-│   ├── invalidated.tsv
-│   ├── other.tsv
-│   ├── reported.tsv
-│   ├── test.tsv
-│   ├── train.tsv
-│   ├── unvalidated_sentences.tsv
-│   ├── validated.tsv
-│   └── validated_sentences.tsv
-│
-├── de/
-├── en/
-├── es/
-├── fi/
-├── fr/
-├── hu/
-├── id/
-├── pl/
-├── ru/
-│
-├── processed_data/
-├── saved_weights/
-│
-├── cleaner.py
-├── cuda_tester.py
-├── data_loader.py
-├── familyMap.py
-├── intoSpectogram.py
-├── model.py
-├── run.py
-├── temp_debug.py
-│
-├── LICENSE
-└── README.md
+    ar/
+        clips/
+        clip_durations.tsv
+        dev.tsv
+        invalidated.tsv
+        other.tsv
+        reported.tsv
+        test.tsv
+        train.tsv
+        unvalidated_sentences.tsv
+        validated.tsv
+        validated_sentences.tsv
+    de/
+    en/
+    es/
+    fi/
+    fr/
+    hu/
+    id/
+    pl/
+    ru/
+    processed_data/
+    saved_weights/
+    cleaner.py
+    cuda_tester.py
+    data_loader.py
+    familyMap.py
+    intoSpectogram.py
+    model.py
+    run.py
+    temp_debug.py
+    LICENSE
+    README.md
