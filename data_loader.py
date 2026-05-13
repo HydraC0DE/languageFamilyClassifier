@@ -17,19 +17,12 @@ FAMILY_TO_IDX = {fam: i for i, fam in enumerate(FAMILIES)}
 INPUT_SHAPE = (128, 125, 1)   # mel bins × time frames × channel
 
 
-# ============================
-# LOAD SINGLE FILE
-# ============================
 
 def load_npy(path):
     spec = np.load(path)  # shape: (128, 125)
     spec = np.expand_dims(spec, axis=-1)  # -> (128, 125, 1)
     return spec.astype(np.float32)
 
-
-# ============================
-# BUILD DATASET LIST
-# ============================
 
 def collect_files():
     items = []
@@ -45,10 +38,6 @@ def collect_files():
 
     return items
 
-
-# ============================
-# TF.DATA PIPELINE
-# ============================
 
 def make_dataset(batch_size=32, shuffle=True):
 
