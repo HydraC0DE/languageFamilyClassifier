@@ -1,3 +1,6 @@
+
+<details>
+<summary><strong>Click to expand folder tree</strong></summary>
 LANGUAGEFAMILYCLASSIFIER/
 │
 ├── ar/
