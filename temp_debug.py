@@ -15,20 +15,20 @@ def main():
     files = list(TARGET_DIR.glob("*.npy"))
 
     for file in tqdm(files):
-        arr = np.load(file, mmap_mode='r')  # FAST
+        arr = np.load(file, mmap_mode='r')
         if arr.shape != (128, 125):
             bad.append((file.name, arr.shape))
 
     print(f"\nTotal files scanned: {len(files)}")
 
     if bad:
-        print("\n❌ Wrong shapes:")
+        print("\nWrong shapes:")
         for name, shape in bad[:20]:
             print(f"  {name}: {shape}")
         if len(bad) > 20:
             print(f"... and {len(bad)-20} more")
     else:
-        print("\n✅ All shapes correct")
+        print("\nAll shapes correct")
 
 if __name__ == "__main__":
     main()

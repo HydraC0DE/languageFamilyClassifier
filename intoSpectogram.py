@@ -6,9 +6,7 @@ from tqdm import tqdm
 from familyMap import family_map
 import random
 
-# =====================
-# CONFIG
-# =====================
+
 
 LANG_FOLDERS = sorted(family_map.keys())
 FAMILY_CLASSES = sorted(set(family_map.values()))
@@ -21,15 +19,13 @@ SAMPLE_RATE = 16000
 CLIP_DURATION = 4.0              # seconds
 MAX_LENGTH = int(SAMPLE_RATE * CLIP_DURATION)
 
-SUPPORTED_EXTS = [".wav", ".mp3", ".flac", ".ogg"]
+SUPPORTED_EXTS = [".wav", ".mp3", ".flac", ".ogg"] # useless to be honest
 
 N_MELS = 128
 N_FFT = 1024
 HOP_LENGTH = 512
 
-# =====================
-# AUDIO PROCESSING
-# =====================
+
 
 def load_and_fix_length(filepath):
     y, sr = librosa.load(filepath, sr=SAMPLE_RATE, mono=True)
@@ -55,13 +51,13 @@ def create_log_mel_spectrogram(audio):
         n_mels=N_MELS
     )
 
-    # Convert power spectrogram -> log scale (better for ML)
+
     log_mel = librosa.power_to_db(mel, ref=np.max)
 
-    # Normalize (helps training)
+
     log_mel = (log_mel - np.mean(log_mel)) / (np.std(log_mel) + 1e-8)
 
-    # Force fixed time dimension, some inputes were 125 frames, some 126, some 124.
+
     TARGET_FRAMES = 125
     current_frames = log_mel.shape[1]
 
@@ -74,9 +70,6 @@ def create_log_mel_spectrogram(audio):
     return log_mel.astype(np.float32)
 
 
-# =====================
-# MAIN CONVERSION
-# =====================
 
 def process_language(lang):
     clips_dir = BASE_DIR / lang / "clips"

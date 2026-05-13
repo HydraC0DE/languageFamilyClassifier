@@ -3,20 +3,16 @@ import tensorflow as tf
 from data_loader import make_splits
 from model import build_crnn
 
-# ============================
-# CONFIG
-# ============================
-
-EPOCHS = 10
+EPOCHS = 10 # way too little, but cuda doesnt work :(
 BATCH_SIZE = 32
 
 WEIGHTS_DIR = "saved_weights"
 WEIGHTS_PATH = os.path.join(WEIGHTS_DIR, "crnn.weights.h5")
 
 
-# ============================
+
 # TRAINING
-# ============================
+
 
 def train_and_save():
     print("Loading datasets...")
@@ -60,9 +56,9 @@ def train_and_save():
     return model, test_ds
 
 
-# ============================
+
 # EVALUATION
-# ============================
+
 
 def evaluate(model, test_ds):
     print("Evaluating on test set...")
@@ -71,12 +67,8 @@ def evaluate(model, test_ds):
     print(f"Test Loss: {loss:.4f}")
 
 
-# ============================
-# MAIN LOGIC
-# ============================
-
 if __name__ == "__main__":
-    # If weights exist → load model
+    # If weights exist, then load model, if not, train and save model
     if os.path.exists(WEIGHTS_PATH):
         print("Found saved weights. Loading model...")
 

@@ -4,8 +4,8 @@ import csv
 
 LANG_FOLDER = "es" # others are: es, fr, en, de, pl, ru, fi, hu, ar, in, as in spanish, french, english,
 # german, polish, russian, finnish, hungarian, arabic, indonesian respectively
+# this also takes crazy long thats why i didnt just iterate through these
 
-# Make paths relative to this script's location (not the current working directory)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LANG_PATH = BASE_DIR if LANG_FOLDER in (".", "") else os.path.join(BASE_DIR, LANG_FOLDER)
 
@@ -15,7 +15,6 @@ DURATION_FILE = os.path.join(LANG_PATH, "clip_durations.tsv")
 MAX_DURATION = 4.0  # seconds
 
 def read_validated():
-    """Return set of validated clip filenames."""
     validated = set()
     with open(VALIDATED_FILE, newline='', encoding='utf-8') as f:
         reader = csv.DictReader(f, delimiter='\t')
@@ -24,21 +23,14 @@ def read_validated():
     return validated
 
 def read_durations():
-    """Return dict mapping clip filename -> duration (float seconds)."""
     durations = {}
     with open(DURATION_FILE, newline='', encoding='utf-8') as f:
         reader = csv.DictReader(f, delimiter='\t')
-        # The clip_durations.tsv header may use names like "clip" and "duration[ms]".
-        # Find the best matching columns so this works with different csv variations.
         fieldnames = reader.fieldnames or []
         field_map = {n.lower(): n for n in fieldnames}
 
         path_key = next((field_map[k] for k in field_map if "path" in k or "clip" in k or "file" in k), None)
         dur_key = next((field_map[k] for k in field_map if "duration" in k), None)
-        if not path_key or not dur_key:
-            raise ValueError(
-                f"Unable to locate required columns in {DURATION_FILE}. Found columns: {fieldnames}"
-            )
 
         for row in reader:
             raw_path = row.get(path_key, "")
@@ -50,7 +42,7 @@ def read_durations():
             except ValueError:
                 continue
 
-            # clip_durations are in milliseconds in some versions; convert if needed
+            # néhány valahogy miliszekundumban van
             if dur > 1000:
                 dur = dur / 1000.0
 

@@ -22,7 +22,6 @@ INPUT_SHAPE = (128, 125, 1)   # mel bins × time frames × channel
 # ============================
 
 def load_npy(path):
-    """Load a single spectrogram and add channel dimension."""
     spec = np.load(path)  # shape: (128, 125)
     spec = np.expand_dims(spec, axis=-1)  # -> (128, 125, 1)
     return spec.astype(np.float32)
@@ -33,7 +32,6 @@ def load_npy(path):
 # ============================
 
 def collect_files():
-    """Return list of (filepath, label_index)."""
     items = []
 
     for family in FAMILIES:
@@ -53,7 +51,6 @@ def collect_files():
 # ============================
 
 def make_dataset(batch_size=32, shuffle=True):
-    """Create a tf.data.Dataset from processed .npy spectrograms."""
 
     items = collect_files()
     filepaths = [fp for fp, _ in items]
@@ -79,17 +76,13 @@ def make_dataset(batch_size=32, shuffle=True):
     return ds
 
 
-# ============================
-# TRAIN / VAL / TEST SPLIT
-# ============================
+# train val test split
 
 def make_splits(batch_size=32, val_ratio=0.1, test_ratio=0.1):
-    """Return train_ds, val_ds, test_ds."""
     items = collect_files()
     total = len(items)
 
-    # shuffle once here for deterministic splits
-    rng = np.random.default_rng(42)
+    rng = np.random.default_rng(67) 
     rng.shuffle(items)
 
     n_test = int(total * test_ratio)
