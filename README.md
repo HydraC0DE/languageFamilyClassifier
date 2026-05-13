@@ -1,9 +1,18 @@
-# languageFamilyClassifier
-
-
 LANGUAGEFAMILYCLASSIFIER/
 │
 ├── ar/
+│   ├── clips/
+│   ├── clip_durations.tsv
+│   ├── dev.tsv
+│   ├── invalidated.tsv
+│   ├── other.tsv
+│   ├── reported.tsv
+│   ├── test.tsv
+│   ├── train.tsv
+│   ├── unvalidated_sentences.tsv
+│   ├── validated.tsv
+│   └── validated_sentences.tsv
+│
 ├── de/
 ├── en/
 ├── es/
