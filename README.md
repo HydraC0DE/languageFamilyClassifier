@@ -1,5 +1,5 @@
-LANGUAGEFAMILYCLASSIFIER/ \n
-    ar/ \n
+LANGUAGEFAMILYCLASSIFIER
+    ar/
         clips/
         clip_durations.tsv
         dev.tsv
