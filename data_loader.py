@@ -114,7 +114,7 @@ def make_splits(batch_size=32, val_ratio=0.1, test_ratio=0.1):
     )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # nagyon nem fogjuk mainbe meghívni soha
     train_ds, val_ds, test_ds = make_splits()
     print("Train batches:", len(train_ds))
     print("Val batches:", len(val_ds))
